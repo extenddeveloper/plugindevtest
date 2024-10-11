@@ -112,7 +112,7 @@ function tf_custom_Post_register() {
 		'hierarchical'       => false,
 		'menu_position'      => 20,
 		'supports'           => array('title', 'editor', 'author', 'thumbnail'),
-		'taxonomies'         => array('category', 'post_tag'),
+		'taxonomies'         => array(),
 		'show_in_rest'       => true
 	);
 
