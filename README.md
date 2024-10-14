@@ -11,7 +11,7 @@ Thank you for taking the time to participate in this skill test. We are excited 
 - Once you install the plugin, you will see a "TF Services" post type on your Dashboard.
  - Implement AJAX pagination on the service archive page to load more results without refreshing.
   - Develop a shortcode named `tf_service_result` that displays all services.
-  - Create a custom Gutenberg block that displays all services.
+  - Create a custom Gutenberg block or Elementor Addon or Bricks Builder Addon that displays all services.
   - On plugin activation, a page titled `TF Service Result` will be automatically created with a specific page template. Inside this page include `tf_service_result` shortcode into the editor.
   - Each services can be added to the cart and users can check out using the WooCommerce payment process.
 - Create an <strong>Ajax based Search form</strong> for the frontend of the site.
