@@ -2,3 +2,242 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+ /* Container for services */
+.tf-service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+/* Each service box */
+.tf-service {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: calc(33.333% - 20px); /* Responsive grid for 3 items per row */
+    position: relative;
+}
+
+.tf-service:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Service thumbnail */
+.tf-service-thumbnail {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 3px solid #f5f5f5;
+}
+
+.tf-service-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.tf-service-thumbnail img:hover {
+    transform: scale(1.1);
+}
+
+/* Service details */
+.tf-service-details {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Title styling */
+.tf-service-title {
+	font-size: 1.65rem;
+	margin-bottom: 10px;
+	font-weight: 600;
+	color: #333;
+	transition: color 0.3s ease;
+	text-align: left;
+}
+
+.tf-service-title a, .tf-service-pricing a {
+    text-decoration: none !important;
+}
+
+.tf-service-title a:hover {
+    color: #3498db;
+}
+
+/* Service excerpt */
+.tf-service-excerpt {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: justify;
+    line-height: 1.5rem;
+}
+
+
+/* Pricing */
+.tf-service-pricing {
+    margin-bottom: 15px;
+}
+
+.tf-service-pricing p {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.tf-service-pricing del {
+    color: #999;
+    margin-right: 10px;
+}
+
+.tf-service-pricing strong {
+    color: #e74c3c;
+    font-size: 1.25rem;
+}
+
+/* Add to cart button */
+.tf-service .cart button.button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tf-service .cart button.button:hover {
+    background-color: #2980b9;
+}
+
+/* Quantity input */
+.tf-service .cart .qty {
+    width: 60px;
+    text-align: center;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Read More button */
+.tf-service-read-more {
+    display: inline-block;
+    background-color: #f39c12;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.tf-service-read-more:hover {
+    background-color: #e67e22;
+}
+
+.tfservices-load-more-wrap {
+	text-align: center;
+}
+
+
+/* Ajax Search form css */
+
+/* Modal */
+.search-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+}
+
+.search-modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 50%;
+    border-radius: 10px;
+    position: relative;
+}
+
+#tfservices-search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#tfservices-search-results {
+    margin-top: 20px;
+}
+
+.tfservice-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.tfservice-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+#view-more {
+    background-color: #0073aa;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#view-more:hover {
+    background-color: #005a87;
+}
+
+/* Close Button */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#open-search {
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 75px;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .tf-service {
+        width: calc(50% - 20px); /* 2 items per row on tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .tf-service {
+        width: 100%; /* 1 item per row on mobile */
+    }
+}
+

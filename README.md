@@ -54,5 +54,12 @@ Thank you for taking the time to participate in this skill test. We are excited 
 - **Don’t** install or use any additional frameworks, libraries, page builders or plugins that aren’t instructed in the project requirement, including Bootstrap, Tailwind, etc.
 - **Don’t** pull from or push to any branches of the `plugindevtest` repository *except* for the branch you have created for you.
 
+
+# TF Service Booking Plugin
+
+## Live Demo
+[Click here to view the live demo](http://plugindevtest.extenddeveloper.com)
+
+
 ## Creators
 [Themefic](https://themefic.com) develop WordPress Themes & Plugins for clients Worldwide.

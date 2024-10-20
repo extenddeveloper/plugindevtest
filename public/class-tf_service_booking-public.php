@@ -20,7 +20,8 @@
  * @subpackage Tf_service_booking/public
  * @author     Themefic <career@themefic.com>
  */
-class Tf_service_booking_Public {
+class Tf_service_booking_Public
+{
 
 	/**
 	 * The ID of this plugin.
@@ -47,11 +48,11 @@ class Tf_service_booking_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version)
+	{
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
 	}
 
 	/**
@@ -59,7 +60,8 @@ class Tf_service_booking_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -73,8 +75,7 @@ class Tf_service_booking_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tf_service_booking-public.css', array(), $this->version, 'all' );
-
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/tf_service_booking-public.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -82,7 +83,8 @@ class Tf_service_booking_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -96,8 +98,19 @@ class Tf_service_booking_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tf_service_booking-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tf_service_booking-public.js', array('jquery'), $this->version, false);
 
+		// Localize to pass ajax_url to JS
+		if (is_post_type_archive('tfservices')) {
+			wp_localize_script($this->plugin_name, 'tf_service', array(
+				'ajax_url' => admin_url('admin-ajax.php'),
+				'nonce'    => wp_create_nonce('tf-ajax-nonce'),
+			));
+		}
+
+		wp_localize_script($this->plugin_name, 'tfservicesAjax', array(
+			'ajaxurl' => admin_url('admin-ajax.php'),
+			'nonce'    => wp_create_nonce('tf-ajax-nonce'),
+		));
 	}
-
 }
