@@ -63,7 +63,7 @@ class TFServices
     public function get_plugin_template($template)
     {
         if (is_page_template('tf-service-result.php')) {
-            $custom_template = WP_PLUGIN_DIR . '/plugindevtest/includes/page-templates/tf-service-result.php';
+            $custom_template = WP_PLUGIN_DIR . '/tf_service_booking/includes/page-templates/tf-service-result.php';
             if (file_exists($custom_template)) {
                 $template = $custom_template;
             }
