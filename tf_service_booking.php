@@ -36,6 +36,8 @@ if (! defined('WPINC')) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define('TF_SERVICE_BOOKING_VERSION', '1.0.0');
+define('TF_SERVICE_URL', plugin_dir_url(__FILE__));
+define('TF_SERVICE_ROOT', plugin_dir_path(__FILE__));
 
 /**
  * The code that runs during plugin activation.
