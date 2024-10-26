@@ -89,14 +89,14 @@ class TFServices
             while ($query->have_posts()) {
                 $query->the_post();
                 $image = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
-                echo '<div class="tfservice-item">
+                echo '<div class="tfservices__item">
                         <img src="' . esc_url($image) . '" alt="' . get_the_title() . '" />
                         <a href="' . get_permalink() . '">' . get_the_title() . '</a>
                       </div>';
             }
 
             if ($query->max_num_pages > $paged) {
-                echo '<a id="view-more" href="' . get_bloginfo('url') . '/?s=' . urlencode($search_term) . '&post_type=tfservices">View More</a>';
+                echo '<a id="tfservices__view-more" href="' . get_bloginfo('url') . '/?s=' . urlencode($search_term) . '&post_type=tfservices">View More</a>';
             }
         } else {
             echo 'No services found.';

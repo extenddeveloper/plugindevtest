@@ -16,7 +16,6 @@ $hover-color: darken($primary-color, 10%);
 $shadow-color: rgba(0, 0, 0, 0.1);
 $shadow-hover: rgba(0, 0, 0, 0.15);
 
-
 // Mixin for flexbox layout
 @mixin flex-center($justify: center, $align: center) {
   display: flex;
@@ -24,7 +23,7 @@ $shadow-hover: rgba(0, 0, 0, 0.15);
   align-items: $align;
 }
 
-// Mixin for generating column classes
+// Mixin for columns
 @mixin make-col($size, $col-count: $columns) {
   width: calc((100% / $columns) * $col-count - #{$gutter-width - $gutter-width / $columns});
   flex: 0 0 calc((100% / $columns) * $col-count - #{$gutter-width - $gutter-width / $columns});
@@ -32,7 +31,7 @@ $shadow-hover: rgba(0, 0, 0, 0.15);
   padding: 0 $gutter-width / 2;
 }
 
-// Loop to create classes for different column sizes and breakpoints
+// Loop to create column classes for breakpoints
 @each $breakpoint, $size in $breakpoints {
   @media (min-width: $size) {
     @for $i from 1 through $columns {
@@ -51,29 +50,23 @@ $shadow-hover: rgba(0, 0, 0, 0.15);
   margin-left: -$gutter-width / 2;
 }
 
-// Reset gutter for last item in the row
-[class*="col-"]:last-child {
-  margin-right: 0;
-}
-
-// Container for services
+// Service list container
 .tf-service-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: $gutter-width;
   justify-content: space-between;
   margin-top: 40px;
 }
 
-// Each service box
+// Service box
 .tf-service {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 10px $shadow-color;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: calc(33.333% - 20px); // Responsive grid for 3 items per row
-  position: relative;
+  width: calc(33.333% - 20px);
 
   &:hover {
     transform: translateY(-10px);
@@ -112,7 +105,7 @@ $shadow-hover: rgba(0, 0, 0, 0.15);
     text-align: left;
 
     a {
-      text-decoration: none !important;
+      text-decoration: none;
 
       &:hover {
         color: $primary-color;
@@ -193,8 +186,124 @@ $shadow-hover: rgba(0, 0, 0, 0.15);
   text-align: center;
 }
 
-// Ajax Search form styles
-.search-modal {
+
+// Elementor widgets
+.tf-services__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.tf-services__item {
+  border: 1px solid #e0e0e0;
+  padding: 15px;
+  width: calc(33.33% - 20px); // Adjust width based on columns
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__thumbnail {
+      width: 100%;
+      img {
+          width: 100%;
+          height: auto;
+          border-radius: 5px;
+      }
+  }
+
+  &__details {
+      text-align: center;
+      padding-top: 10px;
+  }
+
+  &__title {
+      font-size: 1.2em;
+      font-weight: 700;
+      margin-bottom: 5px;
+
+      a {
+          color: #333;
+          text-decoration: none;
+          font-size: 1.2em;
+
+          &:hover {
+              color: #0073aa;
+          }
+      }
+  }
+
+  &__excerpt {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 15px;
+  }
+
+  &__pricing {
+      text-align: center;
+      margin-top: 10px;
+
+      .tf-services__price {
+          font-size: 1em;
+          color: #333;
+
+          del {
+              color: #888;
+              margin-right: 5px;
+          }
+
+          strong {
+              color: #ff5722;
+          }
+      }
+  }
+
+  &__cart {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 10px;
+
+      .tf-services__quantity-input {
+          width: 60px;
+          text-align: center;
+          padding: 5px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+      }
+
+      .tf-services__button {
+          padding: 8px 12px;
+          background-color: #0073aa;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+              background-color: #005a8e;
+          }
+      }
+  }
+
+  &__read-more {
+      color: #0073aa;
+      font-weight: bold;
+      margin-top: 10px;
+      display: inline-block;
+
+      &:hover {
+          color: #005a8e;
+      }
+  }
+}
+
+
+// Modal
+.tfservices__search-modal {
   display: none;
   position: fixed;
   top: 0;
@@ -205,16 +314,16 @@ $shadow-hover: rgba(0, 0, 0, 0.15);
   z-index: 9999;
 
   &-content {
-    background-color: #eee;
-    margin: 10% auto;
-    padding: 20px;
-    width: 50%;
-    border-radius: 10px;
-    position: relative;
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      width: 50%;
+      border-radius: 10px;
+      position: relative;
   }
 }
 
-#tfservices-search-input {
+#tfservices__search-input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -222,38 +331,42 @@ $shadow-hover: rgba(0, 0, 0, 0.15);
   font-size: 16px;
 }
 
-#tfservices-search-results {
+#tfservices__search-results {
   margin-top: 20px;
 
-  .tfservice-item {
-    @include flex-center(flex-start, center);
-    margin-bottom: 10px;
+  .tfservices__item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
 
-    img {
-      width: 50px;
-      height: 50px;
-      object-fit: cover;
-      margin-right: 10px;
-      border-radius: 5px;
-    }
+      img {
+          width: 50px;
+          height: 50px;
+          object-fit: cover;
+          margin-right: 10px;
+          border-radius: 5px;
+      }
   }
 }
 
-#view-more {
+#tfservices__view-more {
   background-color: $primary-color;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 20px;
+  display: block;
+  text-align: center;
 
   &:hover {
-    background-color: $hover-color;
+      background-color: $hover-color;
   }
 }
 
 // Close button
-.close-modal {
+.tfservices__close-modal {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -263,11 +376,12 @@ $shadow-hover: rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
 
-#open-search {
+#tfservices__open-search {
   margin: 0 auto;
   display: block;
   margin-bottom: 70px;
 }
+
 
 // Responsive Design
 @media (max-width: 1024px) {

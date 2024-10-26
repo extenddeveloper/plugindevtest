@@ -28,7 +28,6 @@ class TF_Services_Widget extends \Elementor\Widget_Base
 
     protected function _register_controls()
     {
-        // General content settings
         $this->start_controls_section(
             'content_section',
             [
@@ -57,7 +56,7 @@ class TF_Services_Widget extends \Elementor\Widget_Base
 
         $this->end_controls_section();
 
-        // Style section for the image
+        // Image Style
         $this->start_controls_section(
             'image_style_section',
             [
@@ -79,14 +78,14 @@ class TF_Services_Widget extends \Elementor\Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .tf-service-thumbnail img' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .tf-services__item__thumbnail img' => 'width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
 
         $this->end_controls_section();
 
-        // Style section for the title
+        // Title Style
         $this->start_controls_section(
             'title_style_section',
             [
@@ -100,7 +99,7 @@ class TF_Services_Widget extends \Elementor\Widget_Base
             [
                 'name' => 'title_typography',
                 'label' => esc_html__('Typography', 'tf-services'),
-                'selector' => '{{WRAPPER}} .tf-service-title a',
+                'selector' => '{{WRAPPER}} .tf-services__item__title a',
             ]
         );
 
@@ -110,14 +109,14 @@ class TF_Services_Widget extends \Elementor\Widget_Base
                 'label' => esc_html__('Color', 'tf-services'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .tf-service-title a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tf-services__item__title a' => 'color: {{VALUE}};',
                 ],
             ]
         );
 
         $this->end_controls_section();
 
-        // Style section for the excerpt
+        // Excerpt Style
         $this->start_controls_section(
             'excerpt_style_section',
             [
@@ -131,7 +130,7 @@ class TF_Services_Widget extends \Elementor\Widget_Base
             [
                 'name' => 'excerpt_typography',
                 'label' => esc_html__('Typography', 'tf-services'),
-                'selector' => '{{WRAPPER}} .tf-service-excerpt',
+                'selector' => '{{WRAPPER}} .tf-services__item__excerpt',
             ]
         );
 
@@ -141,14 +140,14 @@ class TF_Services_Widget extends \Elementor\Widget_Base
                 'label' => esc_html__('Color', 'tf-services'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .tf-service-excerpt' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tf-services__item__excerpt' => 'color: {{VALUE}};',
                 ],
             ]
         );
 
         $this->end_controls_section();
 
-        // Style section for the price and Add to Cart button
+        // Pricing & Add to Cart Style
         $this->start_controls_section(
             'pricing_style_section',
             [
@@ -163,7 +162,7 @@ class TF_Services_Widget extends \Elementor\Widget_Base
                 'label' => esc_html__('Button Background Color', 'tf-services'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .tf-service-pricing .button' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .tf-services__button' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -174,7 +173,7 @@ class TF_Services_Widget extends \Elementor\Widget_Base
                 'label' => esc_html__('Button Text Color', 'tf-services'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .tf-service-pricing .button' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tf-services__button' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -184,7 +183,7 @@ class TF_Services_Widget extends \Elementor\Widget_Base
             [
                 'name' => 'price_typography',
                 'label' => esc_html__('Price Typography', 'tf-services'),
-                'selector' => '{{WRAPPER}} .tf-service-pricing p',
+                'selector' => '{{WRAPPER}} .tf-services__item__price',
             ]
         );
 
@@ -203,46 +202,44 @@ class TF_Services_Widget extends \Elementor\Widget_Base
         $query = new WP_Query($args);
 
         if ($query->have_posts()) {
-            echo '<div class="tf-service-list">';
+            echo '<div class="tf-services__list">';
             while ($query->have_posts()) {
                 $query->the_post();
                 $regular_price = get_post_meta(get_the_ID(), '_tf_service_regular_price', true);
                 $sale_price = get_post_meta(get_the_ID(), '_tf_service_sale_price', true);
 
-                echo '<div class="tf-service">';
-                echo '<div class="tf-service-thumbnail">';
+                echo '<div class="tf-services__item">';
+                echo '<div class="tf-services__item__thumbnail">';
                 if (has_post_thumbnail()) {
                     echo '<a href="' . get_permalink() . '">';
                     the_post_thumbnail('medium');
                     echo '</a>';
                 }
-                echo '</div>'; // .tf-service-thumbnail
+                echo '</div>';
 
-                echo '<div class="tf-service-details">';
-                echo '<h2 class="tf-service-title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
-                echo '<div class="tf-service-excerpt">' . wp_trim_words(get_the_excerpt(), 20, '...') . '</div>';
+                echo '<div class="tf-services__item__details">';
+                echo '<h2 class="tf-services__item__title"><a href="' . get_permalink() . '">' . get_the_title() . '</a></h2>';
+                echo '<div class="tf-services__item__excerpt">' . wp_trim_words(get_the_excerpt(), 20, '...') . '</div>';
 
-                echo '<div class="tf-service-pricing">';
+                echo '<div class="tf-services__item__pricing">';
                 if (!empty($regular_price)) {
                     if ($sale_price) {
-                        echo '<p><del>' . wc_price($regular_price) . '</del> <strong>' . wc_price($sale_price) . '</strong></p>';
+                        echo '<p class="tf-services__item__price"><del>' . wc_price($regular_price) . '</del> <strong>' . wc_price($sale_price) . '</strong></p>';
                     } else {
-                        echo '<p>' . wc_price($regular_price) . '</p>';
+                        echo '<p class="tf-services__item__price">' . wc_price($regular_price) . '</p>';
                     }
 
-                    // Add to Cart Form
-                    echo '<form class="cart" action="' . esc_url(wc_get_cart_url()) . '" method="post">';
+                    echo '<form class="tf-services__cart" action="' . esc_url(wc_get_cart_url()) . '" method="post">';
                     echo '<input type="hidden" name="add-to-cart" value="' . esc_attr(get_the_ID()) . '">';
-                    echo '<input type="number" name="quantity" value="1" min="1" class="input-text qty text" size="4" />';
-                    echo '<button type="submit" class="button alt">' . __('Add to Cart', 'tf_services') . '</button>';
+                    echo '<input type="number" name="quantity" value="1" min="1" class="tf-services__quantity-input" size="4" />';
+                    echo '<button type="submit" class="tf-services__button button alt">' . __('Add to Cart', 'tf_services') . '</button>';
                     echo '</form>';
                 } else {
-                    echo '<a href="' . get_permalink() . '" class="tf-service-read-more">' . __('Read More', 'tf_services') . '</a>';
+                    echo '<a href="' . get_permalink() . '" class="tf-services__read-more">' . __('Read More', 'tf_services') . '</a>';
                 }
-                echo '</div>'; // .tf-service-pricing
-
-                echo '</div>'; // .tf-service-details
-                echo '</div>'; // .tf-service
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
             }
             echo '</div>';
             wp_reset_postdata();

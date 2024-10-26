@@ -64,17 +64,17 @@ jQuery(document).ready(function ($) {
 
 jQuery(document).ready(function ($) {
     // Open the modal when clicking the search button
-    $('#open-search').on('click', function () {
-        $('#search-modal').fadeIn();
+    $('#tfservices__open-search').on('click', function () {
+        $('#tfservices__search-modal').fadeIn();
     });
 
     // Close modal
-    $('.close-modal').on('click', function () {
-        $('#search-modal').fadeOut();
+    $('.tfservices__close-modal').on('click', function () {
+        $('#tfservices__search-modal').fadeOut();
     });
 
     // AJAX search functionality
-    $('#tfservices-search-input').on('keyup', function () {
+    $('#tfservices__search-input').on('keyup', function () {
         var keyword = $(this).val();
         $.ajax({
             url: tfservicesAjax.ajaxurl,
@@ -85,17 +85,18 @@ jQuery(document).ready(function ($) {
                 paged: 1,
             },
             success: function (response) {
-                $('#tfservices-search-results').html(response);
+                $('#tfservices__search-results').html(response);
             },
         });
     });
 
     // Redirect on "View More" button click to full page search
-    $(document).on('click', '#view-more', function () {
+    $(document).on('click', '#tfservices__view-more', function () {
         var query = $(this).data('query');
         window.location.href = '/tf_services?search=' + query;
     });
 });
+
 
 
 

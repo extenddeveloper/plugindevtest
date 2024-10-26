@@ -375,10 +375,6 @@
   margin-left: -15px;
 }
 
-[class*=col-]:last-child {
-  margin-right: 0;
-}
-
 .tf-service-list {
   display: flex;
   flex-wrap: wrap;
@@ -394,7 +390,6 @@
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: calc(33.333% - 20px);
-  position: relative;
 }
 .tf-service:hover {
   transform: translateY(-10px);
@@ -429,7 +424,7 @@
   text-align: left;
 }
 .tf-service__title a {
-  text-decoration: none !important;
+  text-decoration: none;
 }
 .tf-service__title a:hover {
   color: #3498db;
@@ -494,7 +489,104 @@
   text-align: center;
 }
 
-.search-modal {
+.tf-services__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.tf-services__item {
+  border: 1px solid #e0e0e0;
+  padding: 15px;
+  width: calc(33.33% - 20px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tf-services__item__thumbnail {
+  width: 100%;
+}
+.tf-services__item__thumbnail img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+.tf-services__item__details {
+  text-align: center;
+  padding-top: 10px;
+}
+.tf-services__item__title {
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.tf-services__item__title a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+.tf-services__item__title a:hover {
+  color: #0073aa;
+}
+.tf-services__item__excerpt {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 15px;
+}
+.tf-services__item__pricing {
+  text-align: center;
+  margin-top: 10px;
+}
+.tf-services__item__pricing .tf-services__price {
+  font-size: 1em;
+  color: #333;
+}
+.tf-services__item__pricing .tf-services__price del {
+  color: #888;
+  margin-right: 5px;
+}
+.tf-services__item__pricing .tf-services__price strong {
+  color: #ff5722;
+}
+.tf-services__item__cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+.tf-services__item__cart .tf-services__quantity-input {
+  width: 60px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.tf-services__item__cart .tf-services__button {
+  padding: 8px 12px;
+  background-color: #0073aa;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.tf-services__item__cart .tf-services__button:hover {
+  background-color: #005a8e;
+}
+.tf-services__item__read-more {
+  color: #0073aa;
+  font-weight: bold;
+  margin-top: 10px;
+  display: inline-block;
+}
+.tf-services__item__read-more:hover {
+  color: #005a8e;
+}
+
+.tfservices__search-modal {
   display: none;
   position: fixed;
   top: 0;
@@ -504,8 +596,8 @@
   background: rgba(0, 0, 0, 0.7);
   z-index: 9999;
 }
-.search-modal-content {
-  background-color: #eee;
+.tfservices__search-modal-content {
+  background-color: #fff;
   margin: 10% auto;
   padding: 20px;
   width: 50%;
@@ -513,7 +605,7 @@
   position: relative;
 }
 
-#tfservices-search-input {
+#tfservices__search-input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -521,16 +613,15 @@
   font-size: 16px;
 }
 
-#tfservices-search-results {
+#tfservices__search-results {
   margin-top: 20px;
 }
-#tfservices-search-results .tfservice-item {
+#tfservices__search-results .tfservices__item {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   margin-bottom: 10px;
 }
-#tfservices-search-results .tfservice-item img {
+#tfservices__search-results .tfservices__item img {
   width: 50px;
   height: 50px;
   -o-object-fit: cover;
@@ -539,19 +630,22 @@
   border-radius: 5px;
 }
 
-#view-more {
+#tfservices__view-more {
   background-color: #3498db;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 20px;
+  display: block;
+  text-align: center;
 }
-#view-more:hover {
+#tfservices__view-more:hover {
   background-color: #217dbb;
 }
 
-.close-modal {
+.tfservices__close-modal {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -561,7 +655,7 @@
   cursor: pointer;
 }
 
-#open-search {
+#tfservices__open-search {
   margin: 0 auto;
   display: block;
   margin-bottom: 70px;

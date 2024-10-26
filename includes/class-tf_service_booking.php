@@ -305,28 +305,28 @@ class Tf_service_booking
 			echo '<div class="tf-service-list">';
 			while ($query->have_posts()) {
 				$query->the_post();
-
+		
 				$regular_price = get_post_meta(get_the_ID(), '_tf_service_regular_price', true);
 				$sale_price = get_post_meta(get_the_ID(), '_tf_service_sale_price', true);
 				$product_id = get_the_ID(); // Use service ID as WooCommerce product ID
-
-?>
+		
+				?>
 				<div class="tf-service">
-					<div class="tf-service-thumbnail">
+					<div class="tf-service__thumbnail">
 						<?php if (has_post_thumbnail()) : ?>
 							<a href="<?php the_permalink(); ?>">
 								<?php the_post_thumbnail('medium'); ?>
 							</a>
 						<?php endif; ?>
 					</div>
-					<div class="tf-service-details">
-						<h2 class="tf-service-title">
+					<div class="tf-service__details">
+						<h2 class="tf-service__title">
 							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 						</h2>
-						<div class="tf-service-excerpt">
+						<div class="tf-service__excerpt">
 							<?php echo wp_trim_words(get_the_excerpt(), 20, '...') ?>
 						</div>
-						<div class="tf-service-pricing">
+						<div class="tf-service__pricing">
 							<?php if (!empty($regular_price)) : ?>
 								<!-- Display price -->
 								<?php if ($sale_price) : ?>
@@ -335,28 +335,28 @@ class Tf_service_booking
 								<?php else : ?>
 									<p><?php echo wc_price($regular_price); ?></p>
 								<?php endif; ?>
-
+		
 								<!-- Add to Cart Form -->
-								<form class="cart" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
+								<form class="tf-service__cart" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
 									<input type="hidden" name="add-to-cart" value="<?php echo esc_attr($product_id); ?>">
-									<input type="number" name="quantity" value="1" min="1" class="input-text qty text" size="4" />
-									<button type="submit" class="button alt"><?php _e('Add to Cart', 'tf_services'); ?></button>
+									<input type="number" name="quantity" value="1" min="1" class="tf-service__cart-qty input-text text" size="4" />
+									<button type="submit" class="tf-service__cart-button button alt"><?php _e('Add to Cart', 'tf_services'); ?></button>
 								</form>
 							<?php else : ?>
 								<!-- No price, show Read More -->
-								<a href="<?php the_permalink(); ?>"
-									class="tf-service-read-more"><?php _e('Read More', 'tf_services'); ?></a>
+								<a href="<?php the_permalink(); ?>" class="tf-service__read-more"><?php _e('Read More', 'tf_services'); ?></a>
 							<?php endif; ?>
 						</div>
 					</div>
 				</div>
-		<?php
+				<?php
 			}
 			echo '</div>';
 			wp_reset_postdata();
 		} else {
 			echo 'No services available.';
 		}
+		
 
 		return ob_get_clean();
 	}
@@ -369,20 +369,21 @@ class Tf_service_booking
 	public function tfservices_search_form()
 	{
 		ob_start(); ?>
-		<div id="search-modal" class="search-modal">
-			<div class="search-modal-content">
-				<form id="tfservices-search-form">
-					<input type="text" id="tfservices-search-input" placeholder="Search TF Services..." />
-					<button type="button" class="close-modal">×</button>
-					<div id="tfservices-search-results"></div>
+		<div id="tfservices__search-modal" class="tfservices__search-modal">
+			<div class="tfservices__search-modal-content">
+				<form id="tfservices__search-form">
+					<input type="text" id="tfservices__search-input" placeholder="Search TF Services..." />
+					<button type="button" class="tfservices__close-modal">×</button>
+					<div id="tfservices__search-results"></div>
 				</form>
 			</div>
 		</div>
-		<button id="open-search">
-			<input type="text" name="s" id="" value="" placeholder="Search TF Services...">
-			Search
+		<button id="tfservices__open-search" class="tfservices__open-search">
+			<input type="text" name="s" placeholder="Search TF Services...">
+			<?php echo esc_html_e('Search', 'tf_services'); ?>
 		</button>
-<?php
+
+		<?php
 		return ob_get_clean();
 	}
 
